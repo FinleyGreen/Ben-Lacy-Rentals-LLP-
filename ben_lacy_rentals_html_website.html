@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ben Lacy Rentals LLP</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f7f5f0;
+      color: #000;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 50% -15%, rgba(180, 170, 155, 0.35), transparent 35%),
+        radial-gradient(circle at 90% 90%, rgba(210, 205, 195, 0.45), transparent 30%);
+      z-index: -1;
+    }
+
+    .container {
+      width: min(1240px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .serif {
+      font-family: Georgia, 'Times New Roman', serif;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(247, 245, 240, 0.86);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 0;
+      gap: 28px;
+    }
+
+    .logo {
+      text-align: center;
+      line-height: 1;
+      text-decoration: none;
+      color: #000;
+      min-width: 220px;
+    }
+
+    .logo-main {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 30px;
+      letter-spacing: 0.18em;
+    }
+
+    .logo-sub {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 6px;
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 11px;
+      letter-spacing: 0.34em;
+      color: #57534e;
+    }
+
+    .logo-sub::before,
+    .logo-sub::after {
+      content: "";
+      width: 40px;
+      height: 1px;
+      background: #78716c;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 34px;
+      align-items: center;
+    }
+
+    nav a {
+      color: #57534e;
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.25s ease;
+    }
+
+    nav a:hover {
+      color: #000;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      border-radius: 999px;
+      padding: 14px 24px;
+      text-decoration: none;
+      font-size: 14px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease, border 0.25s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-dark {
+      background: #000;
+      color: #fff;
+    }
+
+    .btn-dark:hover {
+      background: #292524;
+    }
+
+    .btn-light {
+      background: #fff;
+      color: #000;
+      border-color: rgba(0, 0, 0, 0.16);
+    }
+
+    .btn-light:hover {
+      background: #000;
+      color: #fff;
+    }
+
+    section {
+      scroll-margin-top: 110px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 56px;
+      align-items: center;
+      padding: 96px 0 110px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      background: rgba(0, 0, 0, 0.03);
+      border-radius: 999px;
+      padding: 9px 16px;
+      font-size: 11px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #57534e;
+      margin-bottom: 20px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #000;
+    }
+
+    h1 {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: clamp(54px, 7vw, 104px);
+      line-height: 0.95;
+      letter-spacing: -0.045em;
+      max-width: 850px;
+    }
+
+    .hero p {
+      margin-top: 28px;
+      max-width: 700px;
+      color: #57534e;
+      font-size: 18px;
+      line-height: 1.75;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 38px;
+    }
+
+    .hero-card {
+      position: relative;
+      border-radius: 32px;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: -16px;
+      background: rgba(0, 0, 0, 0.1);
+      filter: blur(30px);
+      border-radius: 32px;
+      z-index: -1;
+    }
+
+    .hero-image {
+      position: relative;
+      height: 520px;
+      border-radius: 32px;
+      overflow: hidden;
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      background: #fff;
+      box-shadow: 0 30px 70px rgba(120, 113, 108, 0.35);
+    }
+
+    .hero-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .hero-image::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.72), transparent 55%);
+    }
+
+    .feature-badge {
+      position: absolute;
+      left: 28px;
+      right: 28px;
+      bottom: 28px;
+      padding: 24px;
+      border-radius: 26px;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      z-index: 2;
+    }
+
+    .feature-badge small {
+      display: block;
+      text-transform: uppercase;
+      letter-spacing: 0.25em;
+      color: #78716c;
+      font-size: 11px;
+      margin-bottom: 9px;
+    }
+
+    .feature-badge h2 {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    .feature-badge p {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .stats-section {
+      border-top: 1px solid rgba(0, 0, 0, 0.1);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      background: rgba(255, 255, 255, 0.7);
+      padding: 44px 0;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 22px;
+    }
+
+    .stat {
+      background: #fff;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 30px;
+      padding: 34px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .stat:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 18px 38px rgba(0, 0, 0, 0.1);
+    }
+
+    .stat h3 {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: clamp(44px, 4vw, 72px);
+      line-height: 1;
+      margin-bottom: 28px;
+    }
+
+    .stat p {
+      color: #57534e;
+      font-size: 17px;
+      line-height: 1.7;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 70px;
+      padding: 100px 0;
+    }
+
+    .split h2,
+    .case-heading h2,
+    .contact h2 {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: clamp(44px, 5vw, 72px);
+      line-height: 1.05;
+      letter-spacing: -0.035em;
+    }
+
+    .copy p {
+      color: #57534e;
+      font-size: 17px;
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    .services {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+      padding-bottom: 100px;
+    }
+
+    .service-card {
+      background: #fff;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 30px;
+      padding: 34px;
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.05);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 18px 38px rgba(0, 0, 0, 0.1);
+    }
+
+    .icon {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      background: #000;
+      color: #fff;
+      border-radius: 16px;
+      margin-bottom: 26px;
+      font-size: 22px;
+    }
+
+    .service-card h3 {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 28px;
+      margin-bottom: 16px;
+    }
+
+    .service-card p {
+      color: #57534e;
+      line-height: 1.75;
+      font-size: 15px;
+    }
+
+    .case-section {
+      background: #fff;
+      padding: 100px 0;
+    }
+
+    .case-heading {
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 70px;
+      margin-bottom: 52px;
+    }
+
+    .case-heading p {
+      color: #57534e;
+      font-size: 17px;
+      line-height: 1.8;
+    }
+
+    .case-grid {
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: 34px;
+      align-items: start;
+    }
+
+    .main-photo {
+      border-radius: 32px;
+      overflow: hidden;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      background: #f7f5f0;
+      height: 560px;
+    }
+
+    .main-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      animation: fadeIn 0.35s ease;
+    }
+
+    .thumbs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .thumb {
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      background: #fff;
+      border-radius: 18px;
+      overflow: hidden;
+      height: 108px;
+      cursor: pointer;
+      opacity: 0.65;
+      transition: opacity 0.2s ease, border 0.2s ease, transform 0.2s ease;
+    }
+
+    .thumb:hover,
+    .thumb.active {
+      opacity: 1;
+      border-color: #000;
+      transform: translateY(-2px);
+    }
+
+    .thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .overview {
+      background: #f7f5f0;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 32px;
+      padding: 34px;
+    }
+
+    .overview h3 {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 34px;
+      margin-bottom: 24px;
+    }
+
+    .overview-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .overview-item {
+      background: #fff;
+      border-radius: 18px;
+      padding: 18px;
+      color: #57534e;
+      font-size: 14px;
+    }
+
+    .overview-item span {
+      display: block;
+      color: #78716c;
+      margin-bottom: 6px;
+      font-size: 13px;
+    }
+
+    .overview p {
+      color: #57534e;
+      line-height: 1.8;
+    }
+
+    .contact {
+      padding: 100px 0;
+    }
+
+    .contact-box {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      overflow: hidden;
+      border-radius: 32px;
+      background: #000;
+      color: #fff;
+      box-shadow: 0 30px 70px rgba(120, 113, 108, 0.35);
+    }
+
+    .contact-info,
+    .contact-form-wrap {
+      padding: 54px;
+    }
+
+    .contact-info p {
+      color: #d6d3d1;
+      line-height: 1.8;
+      margin-top: 24px;
+      max-width: 620px;
+    }
+
+    .contact-lines {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      margin-top: 30px;
+      color: #d6d3d1;
+      font-size: 15px;
+    }
+
+    .contact-form-wrap {
+      background: #fff;
+      color: #000;
+    }
+
+    form {
+      background: #f7f5f0;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 26px;
+      padding: 28px;
+    }
+
+    form p {
+      color: #57534e;
+      line-height: 1.7;
+      margin: 28px 0 22px;
+      font-size: 14px;
+    }
+
+    .field {
+      margin-bottom: 16px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: #57534e;
+      font-size: 14px;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      background: #fff;
+      border-radius: 16px;
+      padding: 14px 16px;
+      font-size: 15px;
+      outline: none;
+      transition: border-color 0.2s ease;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: #000;
+    }
+
+    .form-button {
+      width: 100%;
+      border: none;
+      margin-top: 8px;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      animation: reveal 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    .delay-1 { animation-delay: 0.08s; }
+    .delay-2 { animation-delay: 0.16s; }
+    .delay-3 { animation-delay: 0.24s; }
+
+    @keyframes reveal {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(1.01); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @media (max-width: 980px) {
+      nav ul {
+        display: none;
+      }
+
+      .hero,
+      .split,
+      .case-heading,
+      .case-grid,
+      .contact-box {
+        grid-template-columns: 1fr;
+      }
+
+      .stats,
+      .services {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .hero {
+        padding-top: 70px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        width: min(100% - 28px, 1240px);
+      }
+
+      .nav {
+        flex-wrap: wrap;
+      }
+
+      .logo {
+        min-width: auto;
+      }
+
+      .logo-main {
+        font-size: 22px;
+      }
+
+      .stats,
+      .services,
+      .overview-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-image,
+      .main-photo {
+        height: 390px;
+      }
+
+      .thumbs {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .contact-info,
+      .contact-form-wrap {
+        padding: 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a href="#home" class="logo" aria-label="Ben Lacy Rentals LLP home">
+        <div class="logo-main">BEN LACY</div>
+        <div class="logo-sub">RENTALS LLP</div>
+      </a>
+
+      <nav>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#case-study">Case Study</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <a class="btn btn-dark" href="#contact">Enquire →</a>
+    </div>
+  </header>
+
+  <main>
+    <section id="home" class="container hero">
+      <div>
+        <div class="eyebrow reveal">UK and Spain property development and rentals</div>
+        <h1 class="reveal delay-1">Creating refined homes across the UK and Spain.</h1>
+        <p class="reveal delay-2">Ben Lacy Rentals LLP is a privately run property development and landlord company operating across the UK and Spain. Since 2010, the company has developed, refurbished and managed a broad range of residential property, with a focus on quality, comfort and long term value.</p>
+        <div class="hero-actions reveal delay-3">
+          <a class="btn btn-dark" href="#case-study">View case study →</a>
+          <a class="btn btn-light" href="#contact">Discuss an opportunity</a>
+        </div>
+      </div>
+
+      <div class="hero-card reveal delay-2">
+        <div class="hero-image">
+          <img src="https://media.rightmove.co.uk/dir/property-photo/f3248a399/173520290/f3248a399af3421966e3f5031fcc73a4_max_656x437.jpeg" alt="24 Market Street exterior" />
+          <div class="feature-badge">
+            <small>Featured project</small>
+            <h2>24 Market Street</h2>
+            <p>A characterful Poole Old Town home, combining historic architecture with carefully considered modern interiors.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats-section">
+      <div class="container stats">
+        <div class="stat reveal">
+          <h3>Property</h3>
+          <p>Developing, improving and managing residential property since 2010.</p>
+        </div>
+        <div class="stat reveal delay-1">
+          <h3>Areas</h3>
+          <p>Operating across the UK and Spain, with experience across a range of residential locations.</p>
+        </div>
+        <div class="stat reveal delay-2">
+          <h3>Rental</h3>
+          <p>Homes prepared with residents, durability and presentation in mind.</p>
+        </div>
+        <div class="stat reveal delay-3">
+          <h3>Quality</h3>
+          <p>A practical approach to design, maintenance and long term ownership.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="container split">
+      <div class="reveal">
+        <div class="eyebrow">Property developers and landlords</div>
+        <h2>Official Details</h2>
+      </div>
+      <div class="copy reveal delay-1">
+        <p>Since 2010, Ben Lacy Rentals LLP has operated as a property developer and landlord, building experience across residential assets in the UK and Spain. The company takes a measured, long term view, improving homes so they are more comfortable, more efficient and better suited to modern living.</p>
+        <p>The work is not limited to one property type or location. Projects include period homes, family houses, rental properties and refurbishment opportunities where thoughtful investment can improve both the resident experience and the quality of the asset.</p>
+        <p>The aim is simple: create clean, well presented homes that feel cared for, function properly and stand the test of time.</p>
+      </div>
+    </section>
+
+    <section id="services" class="container services">
+      <div class="service-card reveal">
+        <div class="icon">⌂</div>
+        <h3>Development</h3>
+        <p>Identifying residential opportunities across the UK and Spain with scope to improve layout, quality, presentation and long term value.</p>
+      </div>
+      <div class="service-card reveal delay-1">
+        <div class="icon">◈</div>
+        <h3>Refurbishment</h3>
+        <p>Improving homes through practical design decisions, strong finishes and attention to the details people notice every day.</p>
+      </div>
+      <div class="service-card reveal delay-2">
+        <div class="icon">✓</div>
+        <h3>Rental Management</h3>
+        <p>Maintaining homes with a hands on approach, clear standards and a focus on reliable long term occupancy.</p>
+      </div>
+    </section>
+
+    <section id="case-study" class="case-section">
+      <div class="container">
+        <div class="case-heading">
+          <div class="reveal">
+            <div class="eyebrow">Case study</div>
+            <h2>24 Market Street</h2>
+          </div>
+          <p class="reveal delay-1">24 Market Street is a distinctive home in the heart of Poole Old Town, close to Poole Quay, local amenities and the historic town centre setting. The property brings together traditional external character, generous accommodation and a modern internal finish.</p>
+        </div>
+
+        <div class="case-grid">
+          <div class="main-photo reveal">
+            <img id="mainCaseImage" src="https://media.rightmove.co.uk/dir/property-photo/f3248a399/173520290/f3248a399af3421966e3f5031fcc73a4_max_656x437.jpeg" alt="24 Market Street case study image" />
+          </div>
+
+          <div class="reveal delay-1">
+            <div class="thumbs" id="thumbs">
+              <button class="thumb active" type="button" data-src="https://media.rightmove.co.uk/dir/property-photo/f3248a399/173520290/f3248a399af3421966e3f5031fcc73a4_max_656x437.jpeg"><img src="https://media.rightmove.co.uk/dir/property-photo/f3248a399/173520290/f3248a399af3421966e3f5031fcc73a4_max_656x437.jpeg" alt="Exterior" /></button>
+              <button class="thumb" type="button" data-src="https://media.rightmove.co.uk/dir/property-photo/d0d0c3180/173520290/d0d0c3180188080d2c2c2deb64dd0234_max_656x437.jpeg"><img src="https://media.rightmove.co.uk/dir/property-photo/d0d0c3180/173520290/d0d0c3180188080d2c2c2deb64dd0234_max_656x437.jpeg" alt="Kitchen and dining area" /></button>
+              <button class="thumb" type="button" data-src="https://media.rightmove.co.uk/dir/property-photo/ec1470bbb/173520290/ec1470bbb005f916e70876dcea90aa87_max_656x437.jpeg"><img src="https://media.rightmove.co.uk/dir/property-photo/ec1470bbb/173520290/ec1470bbb005f916e70876dcea90aa87_max_656x437.jpeg" alt="Living room" /></button>
+            </div>
+
+            <div class="overview">
+              <h3>Project overview</h3>
+              <div class="overview-grid">
+                <div class="overview-item"><span>Property</span>Character residential home</div>
+                <div class="overview-item"><span>Location</span>Poole Old Town</div>
+                <div class="overview-item"><span>Accommodation</span>Four bedrooms, two bathrooms</div>
+                <div class="overview-item"><span>Focus</span>Character, comfort and presentation</div>
+              </div>
+              <p>The property includes a modern kitchen and dining space, multiple sitting areas, a lower ground lounge, a principal bedroom with strong natural light and a fresh bathroom finish. The result is a home with a warm, individual feel while still offering the practicality expected from a well maintained rental asset.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="container services" style="padding-top: 100px;">
+      <div class="service-card reveal">
+        <div class="icon">⌂</div>
+        <h3>Quality homes</h3>
+        <p>Homes are improved with comfort, presentation and everyday practicality at the centre of each decision.</p>
+      </div>
+      <div class="service-card reveal delay-1">
+        <div class="icon">⌖</div>
+        <h3>UK and Spain focus</h3>
+        <p>The company operates across the UK and Spain, with a focus on well located residential property and long term rental value.</p>
+      </div>
+      <div class="service-card reveal delay-2">
+        <div class="icon">✦</div>
+        <h3>Modern living</h3>
+        <p>Interiors are approached with a balance of durability, warmth and contemporary appeal.</p>
+      </div>
+    </section>
+
+    <section id="contact" class="contact">
+      <div class="container contact-box">
+        <div class="contact-info">
+          <div class="eyebrow" style="border-color: rgba(255,255,255,0.16); background: rgba(255,255,255,0.08); color: #d6d3d1;">Contact</div>
+          <h2>Let’s talk property.</h2>
+          <p>For rental enquiries, acquisition opportunities or private development discussions across the UK and Spain, contact Ben Lacy Rentals LLP.</p>
+          <div class="contact-lines">
+            <span>✉ hello@benlacyrentalsllp.com</span>
+            <span>☎ 0785055080</span>
+          </div>
+        </div>
+
+        <div class="contact-form-wrap">
+          <form action="mailto:hello@benlacyrentalsllp.com" method="post" enctype="text/plain">
+            <div class="logo">
+              <div class="logo-main">BEN LACY</div>
+              <div class="logo-sub">RENTALS LLP</div>
+            </div>
+            <p>Send an enquiry directly to Ben Lacy Rentals LLP.</p>
+
+            <div class="field">
+              <label for="name">Name</label>
+              <input id="name" name="Name" type="text" placeholder="Your name" required />
+            </div>
+
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" name="Email" type="email" placeholder="your@email.com" required />
+            </div>
+
+            <div class="field">
+              <label for="phone">Phone</label>
+              <input id="phone" name="Phone" type="tel" placeholder="Your phone number" />
+            </div>
+
+            <div class="field">
+              <label for="message">Message</label>
+              <textarea id="message" name="Message" placeholder="Tell us how we can help" required></textarea>
+            </div>
+
+            <button class="btn btn-dark form-button" type="submit">Send enquiry →</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const mainCaseImage = document.getElementById('mainCaseImage');
+    const thumbs = document.querySelectorAll('.thumb');
+
+    thumbs.forEach((thumb) => {
+      thumb.addEventListener('click', () => {
+        const src = thumb.getAttribute('data-src');
+        mainCaseImage.src = src;
+
+        thumbs.forEach((item) => item.classList.remove('active'));
+        thumb.classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>
